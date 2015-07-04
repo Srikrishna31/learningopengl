@@ -8,7 +8,11 @@ uniform float angle;
 void
 main()
 {
-    gl_Position = vPosition;
+    float d = distance(vPosition, vec4(center.x, center.y, 0.0, 0.0));
+    float twist = d * radians(angle);
+    gl_Position = vec4(vPosition.x * cos(twist) - vPosition.y * sin(twist), 
+                       vPosition.x * sin(twist) + vPosition.y * cos(twist), 
+                       vPosition.z, vPosition.w);
 }
 </script>
 
@@ -25,6 +29,7 @@ main()
 <script type="text/javascript" src="../Common/webgl-utils.js"></script>
 <script type="text/javascript" src="../Common/initShaders.js"></script>
 <script type="text/javascript" src="../Common/flatten.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
 <script type="text/javascript" src="twisted.js"></script>
 </head>
 

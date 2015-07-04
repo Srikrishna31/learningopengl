@@ -3,15 +3,14 @@
 /* global window */
 /* global document */
 /* global WebGLUtils */
-/* global Float32Array */
 /* global initShaders */
 /* global flatten */
 
 var Twisted = function()
 {
     var gl;
-    //var points;
-
+    var points = [];
+    var numOfSubdivisions = 5;
     var canvas = document.getElementById("gl-canvas");
     
     gl = WebGLUtils.setupWebGL(canvas);
@@ -20,8 +19,8 @@ var Twisted = function()
         alert("WebGL isn't available");
     }
     
-    var vert = [[-1,-1], [0,1], [1,-1]];
-    var flattenedArr = flatten(vert);
+    var vert = [[-0.75,-0.75], [0,0.75], [0.75,-0.75]];
+    divideTriangle(vert[0], vert[1], vert[2], numOfSubdivisions);
     var center = vert.reduce(function(prev, curr, ind, vert)
                             {
         return [prev[0] + curr[0], prev[1] + curr[1]];
@@ -30,6 +29,7 @@ var Twisted = function()
     
     center = [center[0] / vert.length, center[1] / vert.length];
     console.log(center);
+
     //Configure WebGL
     gl.viewport(0,0, canvas.width, canvas.height);
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -39,7 +39,7 @@ var Twisted = function()
     gl.useProgram(program);
     var bufferId = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, bufferId);
-    gl.bufferData(gl.ARRAY_BUFFER, flattenedArr, gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(points), gl.STATIC_DRAW);
     
     //Associate out shader variables with our data buffer
     var vPosition = gl.getAttribLocation(program, "vPosition");
@@ -52,10 +52,31 @@ var Twisted = function()
     this.render = function()
     {
         gl.clear(gl.COLOR_BUFFER_BIT);
-        gl.drawArrays(gl.TRIANGLES, 0, 3);
+        gl.drawArrays(gl.TRIANGLES, 0, points.length);
     };
     
     this.render();
+    
+    function divideTriangle( a, b, c, count )
+    {
+        // check for end of recursion
+        if ( count === 0 ) {
+            points.push( a, b, c );
+        }
+        else {
+            //bisect the sides
+            var ab = mix( a, b, 0.5 );
+            var ac = mix( a, c, 0.5 );
+            var bc = mix( b, c, 0.5 );
+
+            // four new triangles
+            divideTriangle( a, ab, ac, count - 1);
+            divideTriangle( c, ac, bc, count - 1);
+            divideTriangle( b, bc, ab, count - 1);
+            divideTriangle(ab, ac, bc, count - 1);
+        }
+    }
+
 };
 
 window.onload = function init()
