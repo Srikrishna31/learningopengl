@@ -5,12 +5,14 @@
 /* global WebGLUtils */
 /* global initShaders */
 /* global flatten */
+/* global mix */
+/* global vec4 */
 
 var Twisted = function()
 {
     var gl;
     var points = [];
-    var numOfSubdivisions = 5;
+    var numOfSubdivisions = 10;
     var canvas = document.getElementById("gl-canvas");
     
     gl = WebGLUtils.setupWebGL(canvas);
@@ -19,7 +21,7 @@ var Twisted = function()
         alert("WebGL isn't available");
     }
     
-    var vert = [[-0.75,-0.75], [0,0.75], [0.75,-0.75]];
+    var vert = [[-0.5,-0.5], [0,0.5], [0.5,-0.5]];
     divideTriangle(vert[0], vert[1], vert[2], numOfSubdivisions);
     var center = vert.reduce(function(prev, curr, ind, vert)
                             {
@@ -49,6 +51,8 @@ var Twisted = function()
     gl.uniform2fv(gl.getUniformLocation(program, "center"), center);
     gl.uniform1f(gl.getUniformLocation(program, "angle"), 45);
     
+    gl.uniform4fv(gl.getUniformLocation(program, "color"), 
+                                       vec4(1.0, 0.0, 0.0, 1.0));
     this.render = function()
     {
         gl.clear(gl.COLOR_BUFFER_BIT);

@@ -8,21 +8,25 @@ uniform float angle;
 void
 main()
 {
-    float d = distance(vPosition, vec4(center.x, center.y, 0.0, 0.0));
+    float d = distance(vPosition, vec4(center.x, 
+                                       center.y, 
+                                       vPosition.z, 
+                                       vPosition.w));
     float twist = d * radians(angle);
     gl_Position = vec4(vPosition.x * cos(twist) - vPosition.y * sin(twist), 
                        vPosition.x * sin(twist) + vPosition.y * cos(twist), 
-                       vPosition.z, vPosition.w);
+                       vPosition.z, 
+                       vPosition.w);
 }
 </script>
 
 <script id="fragment-shader" type="x-shader/x-fragment">
 precision mediump float;
-
+uniform vec4 color;
 void
 main()
 {
-    gl_FragColor = vec4( 1.0, 0.0, 0.0, 1.0 );
+    gl_FragColor = color;
 }
 </script>
 
