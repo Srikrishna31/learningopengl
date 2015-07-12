@@ -8,6 +8,7 @@ from OpenGL.GLU import *
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtOpenGL import *
 
+
 class SpiralWidget(QGLWidget):
     def __init__(self, parent):  
         super().__init__(parent)
@@ -57,7 +58,7 @@ class SpiralWidget(QGLWidget):
             x = radius * math.sin(rad)
             y = radius * math.cos(rad)
 
-        glVertexPointer(spiral_array)
+        glVertexPointerf(spiral_array)
         glDrawArrays(GL_LINE_STRIP, 0, len(spiral_array))
         glFlush()
 
