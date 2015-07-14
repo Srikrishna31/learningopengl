@@ -31,7 +31,7 @@ main()
 </script>
 
 <script type="text/javascript" src="../Common/webgl-utils.js"></script>
-<script type="text/javascript" src="../Common/webgl-debug.js"></script>
+<!--<script type="text/javascript" src="../Common/webgl-debug.js"></script>-->
 <script type="text/javascript" src="../Common/initShaders.js"></script>
 <script type="text/javascript" src="../Common/flatten.js"></script>
 <script type="text/javascript" src="../Common/MV.js"></script>
@@ -40,7 +40,6 @@ main()
 </head>
 
 <body>
-<button id="MyButton">Test Button</button>
 <canvas id="gl-canvas" width="512" height="512">
 Oops ... your browser doesn't support the HTML5 canvas element
 </canvas>
@@ -48,5 +47,8 @@ Oops ... your browser doesn't support the HTML5 canvas element
     Twist Angle 0 <input id="slide" type="range" min="0" max="360" step="1" 
                          value="45" />
      360 </div>
+<div> Number of Subdivision Steps <input id="subdiv" type="text" value="5" />
+
+    </div>
 </body>
 </html>
