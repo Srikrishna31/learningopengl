@@ -2,13 +2,10 @@
 
 var mouse_paint = function()
 {
-    var canvas;
-    var gl;
     var self = this
     var maxNumTriangles = 200;
     var maxNumVertices  = 3 * maxNumTriangles;
     var index = 0;
-    var first = true;
 
     var t1, t2, t3, t4;
 
@@ -24,15 +21,13 @@ var mouse_paint = function()
         vec4( 0.0, 1.0, 1.0, 1.0 )   // cyan
     ];
 
-    canvas = document.getElementById( "gl-canvas" );
+    var canvas = document.getElementById( "gl-canvas" );
 
-    gl = WebGLUtils.setupWebGL( canvas );
+    var gl = WebGLUtils.setupWebGL( canvas );
     if ( !gl ) { alert( "WebGL isn't available" ); }
 
     gl.viewport( 0, 0, canvas.width, canvas.height );
     gl.clearColor( 0.8, 0.8, 0.8, 1.0 );
-    gl.clear( gl.COLOR_BUFFER_BIT );
-
 
     //
     //  Load shaders and initialize attribute buffers
@@ -63,12 +58,11 @@ var mouse_paint = function()
         cIndex = m.selectedIndex;
     });
 
-
+    var first = true;
     canvas.addEventListener("mousedown", function(event){
         gl.bindBuffer( gl.ARRAY_BUFFER, vBuffer);
         if(first) {
             first = false;
-            gl.bindBuffer( gl.ARRAY_BUFFER, vBuffer)
             t1 = vec2(2*event.clientX/canvas.width-1,
                 2*(canvas.height-event.clientY)/canvas.height-1);
         }
@@ -95,6 +89,10 @@ var mouse_paint = function()
         }
     } );
 
+    canvas.addEventListener("mousemove", function(event)
+    {
+
+    });
     this.render = function() {
 
         gl.clear( gl.COLOR_BUFFER_BIT );
