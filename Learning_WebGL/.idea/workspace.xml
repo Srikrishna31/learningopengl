@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fb8d6ce1-0a12-4bb3-bc1b-acfc5f402b1d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CAD/cad.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CAD/cad.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Twisted/twisted.js" afterPath="$PROJECT_DIR$/Twisted/twisted.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="fb8d6ce1-0a12-4bb3-bc1b-acfc5f402b1d" name="Default" comment="" />
     <ignored path="Learning_WebGL.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -38,21 +33,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cad.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="cad.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CAD/cad.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8798521">
+            <state vertical-scroll-proportion="0.0">
               <caret line="88" column="16" selection-start-line="88" selection-start-column="16" selection-end-line="88" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cad.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CAD/cad.html">
+      <file leaf-file-name="mouse_paint.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Mouse_Paint/mouse_paint.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.038462">
-              <caret line="29" column="39" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="39" />
+            <state vertical-scroll-proportion="-18.5">
+              <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mouse_paint.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Mouse_Paint/mouse_paint.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6857671">
+              <caret line="104" column="43" selection-start-line="104" selection-start-column="43" selection-end-line="104" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -62,7 +67,7 @@
         <entry file="file://$PROJECT_DIR$/Maxwell_Triangle/maxwell_triangle.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+              <caret line="47" column="4" selection-start-line="47" selection-start-column="4" selection-end-line="47" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -90,6 +95,8 @@
         <option value="$PROJECT_DIR$/CAD/cad.html" />
         <option value="chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/jquery-2.1.0.min.js" />
         <option value="$PROJECT_DIR$/CAD/cad.js" />
+        <option value="$PROJECT_DIR$/Mouse_Paint/mouse_paint.html" />
+        <option value="$PROJECT_DIR$/Mouse_Paint/mouse_paint.js" />
       </list>
     </option>
   </component>
@@ -185,6 +192,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Mouse_Paint" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Learning_WebGL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Learning_WebGL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Maxwell_Triangle" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -217,7 +238,7 @@
     <property name="FullScreen" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
   </component>
-  <component name="RunManager" selected="JavaScript Debug.cad.html">
+  <component name="RunManager" selected="JavaScript Debug.mouse_paint.html">
     <configuration default="false" name="twisted.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Learning_WebGL/Twisted/twisted.html">
       <method />
     </configuration>
@@ -225,6 +246,9 @@
       <method />
     </configuration>
     <configuration default="false" name="cad.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Learning_WebGL/CAD/cad.html">
+      <method />
+    </configuration>
+    <configuration default="false" name="mouse_paint.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Learning_WebGL/Mouse_Paint/mouse_paint.html">
       <method />
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -571,16 +595,18 @@
       <envs />
       <method />
     </configuration>
-    <list size="3">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.twisted.html" />
       <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.maxwell_triangle.html" />
       <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.cad.html" />
+      <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.mouse_paint.html" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.cad.html" />
-        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.maxwell_triangle.html" />
-        <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.twisted.html" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.mouse_paint.html" />
+        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.cad.html" />
+        <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.maxwell_triangle.html" />
+        <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.twisted.html" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="TestNG" default="true" selected="false">
@@ -609,12 +635,12 @@
       <updated>1436848696095</updated>
       <workItem from="1436848700275" duration="1692000" />
       <workItem from="1437009486742" duration="2743000" />
-      <workItem from="1437538699961" duration="740000" />
+      <workItem from="1437538699961" duration="2299000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5175000" />
+    <option name="totallyTimeSpent" value="6734000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -675,7 +701,7 @@
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="3" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -732,14 +758,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Maxwell_Triangle/maxwell_triangle.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Maxwell_Triangle/maxwell_triangle.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-18.961538">
@@ -748,18 +766,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CAD/cad.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="88" column="16" selection-start-line="88" selection-start-column="16" selection-end-line="88" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Mouse_Paint/mouse_paint.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.5">
+          <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CAD/cad.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.038462">
+        <state vertical-scroll-proportion="0.40582526">
           <caret line="29" column="39" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CAD/cad.js">
+    <entry file="file://$PROJECT_DIR$/Maxwell_Triangle/maxwell_triangle.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8798521">
-          <caret line="88" column="16" selection-start-line="88" selection-start-column="16" selection-end-line="88" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="47" column="4" selection-start-line="47" selection-start-column="4" selection-end-line="47" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Mouse_Paint/mouse_paint.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6857671">
+          <caret line="104" column="43" selection-start-line="104" selection-start-column="43" selection-end-line="104" selection-end-column="43" />
           <folding />
         </state>
       </provider>
