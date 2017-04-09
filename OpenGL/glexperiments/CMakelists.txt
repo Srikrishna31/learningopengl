@@ -1,0 +1,20 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8.8 FATAL_ERROR)
+
+PROJECT(glexperiments)
+
+INCLUDE_DIRECTORIES(../freeglut-3.0.0/include/)
+SET(PROJECT_LINK_LIBS freeglutd.lib)
+LINK_DIRECTORIES(../build/freeglut/lib/${CMAKE_BUILD_TYPE}/)
+
+SET(PROJECT_LINK_LIBS freeglutd.dll)
+LINK_DIRECTORIES(../build/freeglut/bin/${CMAKE_BUILD_TYPE}/)
+
+ADD_EXECUTABLE(glexperiments GLExperiments.cpp)
+TARGET_LINK_LIBRARIES(glexperiments ${PROJECT_LINK_LIBS})
+
+#Copy the freeglutd.dll to the exe path for execution
+MESSAGE(STATUS "CMAKE BUILD TYPE: ${CMAKE_BUILD_TYPE}") #For some reason, ${CMAKE_BUILD_TYPE} is empty
+ADD_CUSTOM_COMMAND(TARGET glexperiments POST_BUILD 
+                    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                    "${PROJECT_SOURCE_DIR}/../build/freeglut/bin/debug/freeglutd.dll"
+                    $<TARGET_FILE_DIR:glexperiments>)
