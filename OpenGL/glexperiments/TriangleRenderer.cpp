@@ -25,25 +25,6 @@ void TriangleRenderer::renderScene(void)
     angle += 0.1f;
 }
 
-void TriangleRenderer::windowResized(int w, int h)
-{
-    //Prevent divide by 0 when window is too short
-    if (h == 0)
-        h = 1;
-
-    auto ratio = 1.0f*w / h;
-
-    glMatrixMode(GL_PROJECTION);
-
-    glLoadIdentity();
-
-    glViewport(0, 0, w, h);
-
-    gluPerspective(45, ratio, 1, 1000);
-
-    glMatrixMode(GL_MODELVIEW);
-}
-
 void TriangleRenderer::processNormalKeys(std::uint8_t key, int x, int y)
 {
     if (key == 27)

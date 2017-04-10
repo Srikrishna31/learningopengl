@@ -1,7 +1,7 @@
 #pragma once
-#include "ISceneRenderer.h"
+#include "DefaultRenderer.h"
 
-class TriangleRenderer : public ISceneRenderer
+class TriangleRenderer : public DefaultRenderer
 {
 private:
     float angle = 0.0f;
@@ -11,7 +11,6 @@ private:
 
 public:
     void renderScene(void) override;
-    void windowResized(int w, int h) override;
     void processNormalKeys(std::uint8_t key, int x, int y) override;
     void processSpecialKeys(int key, int x, int y) override;
 

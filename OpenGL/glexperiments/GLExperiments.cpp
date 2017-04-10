@@ -1,9 +1,8 @@
 #include<iostream>
 #include <GL/glut.h>
 #include <gl/GL.h>
-#include "ISceneRenderer.h"
 #include "TriangleRenderer.h"
-
+#include "SnowmanRenderer.h"
 #include <memory>
 /*
 GLUT tutorial from this site:
@@ -33,7 +32,8 @@ void processSpecialKeys(int key, int x, int y)
 }
 int main(int argc, char *argv[])
 {
-    pRenderer = std::make_unique<TriangleRenderer>();
+    //pRenderer = std::make_unique<TriangleRenderer>();
+    pRenderer = std::make_unique<SnowmanRenderer>();
 
     // init GLUT and create Window
     glutInit(&argc, argv);
@@ -47,6 +47,10 @@ int main(int argc, char *argv[])
     glutIdleFunc(renderScene); //Called when the application is idle.
     glutKeyboardFunc(processNormalKeys);
     glutSpecialFunc(processSpecialKeys);
+
+
+    // OpenGL init
+    glEnable(GL_DEPTH_TEST);
 
     glutMainLoop();
 

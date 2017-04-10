@@ -12,12 +12,12 @@ LINK_DIRECTORIES(../build/freeglut/bin/${CMAKE_BUILD_TYPE}/)
 FILE(GLOB HEADERS "*.h")
 FILE(GLOB SOURCES "*.cpp")
 
-ADD_EXECUTABLE(glexperiments ${SOURCES} ${HEADERS})
-TARGET_LINK_LIBRARIES(glexperiments ${PROJECT_LINK_LIBS} )
+ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${PROJECT_LINK_LIBS} )
 
 #Copy the freeglutd.dll to the exe path for execution
 MESSAGE(STATUS "CMAKE BUILD TYPE: ${CMAKE_BUILD_TYPE}") #For some reason, ${CMAKE_BUILD_TYPE} is empty
-ADD_CUSTOM_COMMAND(TARGET glexperiments POST_BUILD 
+ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD 
                     COMMAND ${CMAKE_COMMAND} -E copy_if_different
                     "${PROJECT_SOURCE_DIR}/../build/freeglut/bin/debug/freeglutd.dll"
-                    $<TARGET_FILE_DIR:glexperiments>)
+                    $<TARGET_FILE_DIR:${PROJECT_NAME}>)
