@@ -5,12 +5,18 @@
 #include "TriangleRenderer.h"
 #include "SnowmanRenderer.h"
 #include <memory>
+#include <vector>
+#include <string>
 /*
 GLUT tutorial from this site:
 http://www.lighthouse3d.com/tutorials/glut-tutorial/initialization/
 */
 
 std::unique_ptr<ISceneRenderer> pRenderer = nullptr;
+
+std::vector<std::string> gl_versions = { "4_5", "4_4", "4_3", "4_2", "4_1", "4_0", "3_3", "3_2", "3_1", "3_0", "2_1", "1_5", "1_4", "1_3", "1_2_1", "1_2", "1_1", "1_0" };
+
+using namespace std::string_literals;
 
 void renderScene(void)
 {
@@ -42,10 +48,16 @@ void getGLInfo()
 
     std::cout << std::endl << "Using GLEW: " << glewGetString(GLEW_VERSION) << std::endl;
 
-    std::cout << "OpenGL 3.0 supported: " << std::boolalpha << static_cast<bool>(glewIsSupported("GL_VERSION_3_0"));
+    auto versionString = "GL_VERSION_"s;
 
-    std::cout << "\nOpenGL 4.1 supported: " << std::boolalpha << static_cast<bool>(glewIsSupported("GL_VERSION_4_1"));
-
+    for (auto ver : gl_versions)
+    {
+        if (glewIsSupported((versionString + ver).c_str()))
+        {
+            std::cout << "\nOpenGL version : " << ver.c_str() << std::endl;
+            break;
+        }
+    }
 }
 
 int main(int argc, char *argv[])
