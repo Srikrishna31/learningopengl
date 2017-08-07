@@ -18,6 +18,9 @@ OPTION(FREEGLUT_BUILD_STATIC_LIBS "Build FreeGLUT static library." OFF)
 OPTION( FREEGLUT_BUILD_DEMOS "Build FreeGLUT demos." OFF )
 
 
+OPTION( glew-cmake_BUILD_STATIC "Build the static glew library" OFF )
+OPTION( glew-cmake_BUILD_SINGLE_CONTEXT "Build the single context glew library" OFF )
+
 ADD_SUBDIRECTORY(${FREEGLUT_DIR})
-#ADD_SUBDIRECTORY(glew-2.0.0)
+ADD_SUBDIRECTORY(glew-2.0.0)
 ADD_SUBDIRECTORY(glexperiments)
