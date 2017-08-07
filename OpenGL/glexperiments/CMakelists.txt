@@ -1,23 +1,30 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8.8 FATAL_ERROR)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.5 FATAL_ERROR)
 
-PROJECT(glexperiments)
+SET (PROJ_DIR glexperiments)
+PROJECT(${PROJ_DIR})
 
-INCLUDE_DIRECTORIES(../freeglut-3.0.0/include/)
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/${FREEGLUT_DIR}/include/)
 SET(PROJECT_LINK_LIBS freeglutd.lib)
-LINK_DIRECTORIES(../build/freeglut/lib/${CMAKE_BUILD_TYPE}/)
+LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/${FREEGLUT_DIR}/lib/${CMAKE_BUILD_TYPE}/)
 
 SET(PROJECT_LINK_LIBS freeglutd.dll)
-LINK_DIRECTORIES(../build/freeglut/bin/${CMAKE_BUILD_TYPE}/)
+LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/${FREEGLUT_DIR}/bin/${CMAKE_BUILD_TYPE}/)
 
-FILE(GLOB HEADERS "*.h")
-FILE(GLOB SOURCES "*.cpp")
+SET(HEADERS ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/DefaultRenderer.h
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/ISceneRenderer.h
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/SnowmanRenderer.h
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/TriangleRenderer.h)
+
+SET(SOURCES ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/DefaultRenderer.cpp
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/glexperiments.cpp
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/SnowmanRenderer.cpp
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/TriangleRenderer.cpp)
 
 ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${PROJECT_LINK_LIBS} )
 
 #Copy the freeglutd.dll to the exe path for execution
-MESSAGE(STATUS "CMAKE BUILD TYPE: ${CMAKE_BUILD_TYPE}") #For some reason, ${CMAKE_BUILD_TYPE} is empty
 ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD 
                     COMMAND ${CMAKE_COMMAND} -E copy_if_different
-                    "${PROJECT_SOURCE_DIR}/../build/freeglut/bin/debug/freeglutd.dll"
+                    "${CMAKE_BINARY_DIR}/${FREEGLUT_DIR}/bin/${CMAKE_BUILD_TYPE}/freeglut${PROJECT_SUFFIX}${CMAKE_SHARED_LIBRARY_SUFFIX}"
                     $<TARGET_FILE_DIR:${PROJECT_NAME}>)
