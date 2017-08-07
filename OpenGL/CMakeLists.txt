@@ -7,6 +7,8 @@ ENDIF()
 
 # Set this here so that the child cmake doesnot need to be changed.
 SET(FREEGLUT_DIR "freeglut-3.0.0")
+SET(GLEW_DIR "glew-2.0.0")
+
 PROJECT(OpenGL_Experiments${PROJECT_SUFFIX})
 
 IF (CMAKE_COMPILER_IS_GNUCC)
@@ -22,5 +24,5 @@ OPTION( glew-cmake_BUILD_STATIC "Build the static glew library" OFF )
 OPTION( glew-cmake_BUILD_SINGLE_CONTEXT "Build the single context glew library" OFF )
 
 ADD_SUBDIRECTORY(${FREEGLUT_DIR})
-ADD_SUBDIRECTORY(glew-2.0.0)
+ADD_SUBDIRECTORY(${GLEW_DIR})
 ADD_SUBDIRECTORY(glexperiments)
