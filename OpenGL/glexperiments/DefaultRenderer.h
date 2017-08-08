@@ -10,5 +10,8 @@ public:
     virtual void windowResized(int w, int h) override;
     virtual void processNormalKeys(uint8_t key, int x, int y) override;
     virtual void processSpecialKeys(int key, int x, int y) override;
+    virtual void processReleaseKey(int key, int x, int y) override;
+    virtual void processMouseButton(int button, int state, int x, int y) override;
+    virtual void processMouseMove(int x, int y) override;
 
 };

@@ -30,6 +30,22 @@ void processSpecialKeys(int key, int x, int y)
 {
     pRenderer->processSpecialKeys(key, x, y);
 }
+
+void processReleaseKey(int key, int x, int y)
+{
+    pRenderer->processReleaseKey(key, x, y);
+}
+
+void processMousePress(int button, int state, int x, int y)
+{
+    pRenderer->processMouseButton(button, state, x, y);
+}
+
+void processMouseMove(int x, int y)
+{
+    pRenderer->processMouseMove(x, y);
+}
+
 int main(int argc, char *argv[])
 {
     //pRenderer = std::make_unique<TriangleRenderer>();
@@ -45,8 +61,15 @@ int main(int argc, char *argv[])
     glutDisplayFunc(renderScene); //Called when the Paint message is received from the OS
     glutReshapeFunc(windowResized); //Called when the window is resized;
     glutIdleFunc(renderScene); //Called when the application is idle.
+
     glutKeyboardFunc(processNormalKeys);
     glutSpecialFunc(processSpecialKeys);
+    //glutIgnoreKeyRepeat(1);
+    glutSpecialUpFunc(processReleaseKey);
+
+    glutMouseFunc(processMousePress);
+    glutMotionFunc(processMouseMove);
+
 
 
     // OpenGL init

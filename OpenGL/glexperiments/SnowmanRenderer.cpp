@@ -9,6 +9,9 @@ SnowmanRenderer::SnowmanRenderer()
     , lz(-1.0f)
     , x(0.0f)
     , z(5.0f)
+    , deltaAngle(0.0f)
+    , deltaMove(0.0f)
+    , xOrigin(-1)
 {}
 
 void SnowmanRenderer::drawSnowman()
@@ -37,8 +40,27 @@ void SnowmanRenderer::drawSnowman()
     glutSolidCone(0.08f, 0.5f, 10, 2);
 }
 
+void SnowmanRenderer::computePos(float deltaMove)
+{
+    x += deltaMove * lx * 0.1f;
+    z += deltaMove * lx * 0.1f;
+}
+
+void SnowmanRenderer::computeDir(float deltaAngle)
+{
+    angle += deltaAngle;
+    lx = static_cast<float>(sin(angle));
+    lz = static_cast<float>(-cos(angle));
+}
+
 void SnowmanRenderer::renderScene(void)
 {
+    if (deltaMove)
+        computePos(deltaMove);
+
+    if (deltaAngle)
+        computeDir(deltaAngle);
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glLoadIdentity();
@@ -95,4 +117,49 @@ void SnowmanRenderer::processSpecialKeys(int key, int x, int y)
         this->z -= lz * fraction;
         break;
     }
+}
+
+void SnowmanRenderer::processReleaseKey(int key, int x, int y)
+{
+    switch (key)
+    {
+    case GLUT_KEY_LEFT:
+    case GLUT_KEY_RIGHT:
+        deltaAngle = 0.0f;
+        break;
+    case GLUT_KEY_UP:
+    case GLUT_KEY_DOWN:
+        deltaMove = 0.0f;
+        break;
+    }
+}
+
+void SnowmanRenderer::processMouseButton(int button, int state, int x, int y)
+{
+    //only start motion if the left button is pressed.
+    if (button == GLUT_LEFT_BUTTON)
+    {
+        if (state == GLUT_UP)
+        {
+            angle += deltaAngle;
+            xOrigin = -1;
+        }
+        else // state == GLUT_DOWN
+        {
+            xOrigin = x;
+        }
+    }
+
+}
+
+void SnowmanRenderer::processMouseMove(int x, int y)
+{
+    if (xOrigin >= 0) //will be true only when the mouse button is down
+    {
+        deltaAngle = (x - xOrigin) * 0.001f;
+        
+        lx = static_cast<float>(sin(angle + deltaAngle));
+        lz = static_cast<float>(-cos(angle + deltaAngle));
+    }
+
 }
