@@ -5,6 +5,7 @@ var mouse_paint = function()
     var self = this
     var maxNumTriangles = 200;
     var maxNumVertices  = 3 * maxNumTriangles;
+    var segments = [];
     var index = 0;
 
     var t1, t2, t3, t4;
@@ -27,7 +28,7 @@ var mouse_paint = function()
     if ( !gl ) { alert( "WebGL isn't available" ); }
 
     gl.viewport( 0, 0, canvas.width, canvas.height );
-    gl.clearColor( 0.8, 0.8, 0.8, 1.0 );
+    gl.clearColor( 0.0, 0.0, 0.0, 1.0 );
 
     //
     //  Load shaders and initialize attribute buffers
@@ -59,54 +60,46 @@ var mouse_paint = function()
     });
 
     var first = true;
-    canvas.addEventListener("mousedown", function(event){
+    canvas.addEventListener("mousedown", function(event)
+    {
         gl.bindBuffer( gl.ARRAY_BUFFER, vBuffer);
-        if(first) {
-            first = false;
-            t1 = vec2(2*event.clientX/canvas.width-1,
-                2*(canvas.height-event.clientY)/canvas.height-1);
-        }
-        else {
-            first = true;
-            t2 = vec2(2*event.clientX/canvas.width-1,
-                2*(canvas.height-event.clientY)/canvas.height-1);
-            t3 = vec2(t1[0], t2[1]);
-            t4 = vec2(t2[0], t1[1]);
 
-            gl.bufferSubData(gl.ARRAY_BUFFER, 8*index, flatten(t1));
-            gl.bufferSubData(gl.ARRAY_BUFFER, 8*(index+1), flatten(t3));
-            gl.bufferSubData(gl.ARRAY_BUFFER, 8*(index+2), flatten(t2));
-            gl.bufferSubData(gl.ARRAY_BUFFER, 8*(index+3), flatten(t4));
-            gl.bindBuffer( gl.ARRAY_BUFFER, cBuffer);
-            index += 4;
-
-            var t = vec4(colors[cIndex]);
-
-            gl.bufferSubData(gl.ARRAY_BUFFER, 16*(index-4), flatten(t));
-            gl.bufferSubData(gl.ARRAY_BUFFER, 16*(index-3), flatten(t));
-            gl.bufferSubData(gl.ARRAY_BUFFER, 16*(index-2), flatten(t));
-            gl.bufferSubData(gl.ARRAY_BUFFER, 16*(index-1), flatten(t));
-        }
+        var t = vec2(2*event.clientX/canvas.width-1,
+            2*(canvas.height-event.clientY)/canvas.height-1);
+        gl.bufferSubData(gl.ARRAY_BUFFER, sizeof['vec2']* index, t);
+        index++;
     } );
 
     canvas.addEventListener("mousemove", function(event)
     {
+        gl.bindBuffer(gl.ARRAY_BUFFER, vBuffer);
+        var t = vec2(2*event.clientX/canvas.width-1,
+            2*(canvas.height-event.clientY)/canvas.height-1);
+        gl.bufferSubData(gl.ARRAY_BUFFER, sizeof['vec2']* index, t);
+        index++;
 
     });
+
+    canvas.addEventListener("mouseup", function(event)
+    {
+        segments.push(index);
+        index = 0;
+    });
+
     this.render = function() {
 
         gl.clear( gl.COLOR_BUFFER_BIT );
 
-        for(var i = 0; i<index; i+=4)
-            gl.drawArrays( gl.TRIANGLE_FAN, i, 4 );
+        segments.forEach(function(index)
+        {
+            for (var i = 0; i < index; i++)
+                gl.drawArrays(gl.LINE_STRIP, i, 1);
+        });
 
         window.requestAnimFrame(self.render);
-
     }
 
     this.render();
-
-
 };
 
 

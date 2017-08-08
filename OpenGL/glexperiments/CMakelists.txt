@@ -1,23 +1,48 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8.8 FATAL_ERROR)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.5 FATAL_ERROR)
 
-PROJECT(glexperiments)
+SET (PROJ_DIR glexperiments)
+PROJECT(${PROJ_DIR})
 
-INCLUDE_DIRECTORIES(../freeglut-3.0.0/include/)
-SET(PROJECT_LINK_LIBS freeglutd.lib)
-LINK_DIRECTORIES(../build/freeglut/lib/${CMAKE_BUILD_TYPE}/)
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/${FREEGLUT_DIR}/include/
+                    ${CMAKE_SOURCE_DIR}/${GLEW_DIR}/include/GL/)
 
-SET(PROJECT_LINK_LIBS freeglutd.dll)
-LINK_DIRECTORIES(../build/freeglut/bin/${CMAKE_BUILD_TYPE}/)
+SET(PROJECT_LINK_LIBS freeglut${PROJECT_SUFFIX}${CMAKE_STATIC_LIBRARY_SUFFIX}
+                      libglewmx_shared${PROJECT_SUFFIX}${CMAKE_STATIC_LIBRARY_SUFFIX})
 
-FILE(GLOB HEADERS "*.h")
-FILE(GLOB SOURCES "*.cpp")
+LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/${FREEGLUT_DIR}/lib/${CMAKE_BUILD_TYPE}/
+                 ${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}/)
 
-ADD_EXECUTABLE(glexperiments ${SOURCES} ${HEADERS})
-TARGET_LINK_LIBRARIES(glexperiments ${PROJECT_LINK_LIBS} )
+SET(PROJECT_LINK_LIBS freeglut${PROJECT_SUFFIX}${CMAKE_SHARED_LIBRARY_SUFFIX}
+                      libglewmx_shared${PROJECT_SUFFIX}${CMAKE_SHARED_LIBRARY_SUFFIX})
 
-#Copy the freeglutd.dll to the exe path for execution
-MESSAGE(STATUS "CMAKE BUILD TYPE: ${CMAKE_BUILD_TYPE}") #For some reason, ${CMAKE_BUILD_TYPE} is empty
-ADD_CUSTOM_COMMAND(TARGET glexperiments POST_BUILD 
+LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/${FREEGLUT_DIR}/bin/${CMAKE_BUILD_TYPE}/
+                 ${CMAKE_BINARY_DIR}/bin/${CMAKE_BUILD_TYPE})
+
+SET(HEADERS ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/DefaultRenderer.h
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/ISceneRenderer.h
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/SnowmanRenderer.h
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/TriangleRenderer.h)
+
+SET(SOURCES ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/DefaultRenderer.cpp
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/glexperiments.cpp
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/SnowmanRenderer.cpp
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/TriangleRenderer.cpp)
+
+ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${PROJECT_LINK_LIBS} )
+
+
+#INSTALL(TARGETS ${PROJECT_NAME} DESTINATION ${PROJECT_BINARY_DIR})
+
+
+#Copy the freeglutd.dll/so to the exe path for execution
+ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD 
                     COMMAND ${CMAKE_COMMAND} -E copy_if_different
-                    "${PROJECT_SOURCE_DIR}/../build/freeglut/bin/debug/freeglutd.dll"
-                    $<TARGET_FILE_DIR:glexperiments>)
+                    "${CMAKE_BINARY_DIR}/${FREEGLUT_DIR}/bin/${CMAKE_BUILD_TYPE}/freeglut${PROJECT_SUFFIX}${CMAKE_SHARED_LIBRARY_SUFFIX}"
+                    $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+
+#Copy the glewd.dll/so to the exe path for execution
+ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD
+                    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                    "${CMAKE_BINARY_DIR}/bin/${CMAKE_BUILD_TYPE}/glewmx${PROJECT_SUFFIX}${CMAKE_SHARED_LIBRARY_SUFFIX}"
+                    $<TARGET_FILE_DIR:${PROJECT_NAME}>)
