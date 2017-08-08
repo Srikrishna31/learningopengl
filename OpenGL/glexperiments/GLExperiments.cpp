@@ -49,14 +49,21 @@ void getGLInfo()
     std::cout << std::endl << "Using GLEW: " << glewGetString(GLEW_VERSION) << std::endl;
 
     auto versionString = "GL_VERSION_"s;
-
+    auto i = 0;
     for (auto ver : gl_versions)
     {
         if (glewIsSupported((versionString + ver).c_str()))
         {
             std::cout << "\nOpenGL version : " << ver.c_str() << std::endl;
+            if (i <= 9) //if version > 3.0
+            {
+                std::cout << std::endl << "Vendor: " << glGetString(GL_VENDOR);
+                std::cout << std::endl << "Renderer: " << glGetString(GL_RENDERER);
+                std::cout << std::endl << "Shading Language Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION);
+            }
             break;
         }
+        ++i;
     }
 }
 
