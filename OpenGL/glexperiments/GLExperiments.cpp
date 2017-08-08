@@ -101,6 +101,8 @@ int main(int argc, char *argv[])
     glutIdleFunc(renderScene); //Called when the application is idle.
     glutKeyboardFunc(processNormalKeys);
     glutSpecialFunc(processSpecialKeys);
+    glutMouseFunc(processMousePress);
+    glutMotionFunc(processMouseMove);
 
 
     // OpenGL init
