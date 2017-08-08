@@ -38,6 +38,21 @@ void processSpecialKeys(int key, int x, int y)
     pRenderer->processSpecialKeys(key, x, y);
 }
 
+void processReleaseKey(int key, int x, int y)
+{
+    pRenderer->processReleaseKey(key, x, y);
+}
+
+void processMousePress(int button, int state, int x, int y)
+{
+    pRenderer->processMouseButton(button, state, x, y);
+}
+
+void processMouseMove(int x, int y)
+{
+    pRenderer->processMouseMove(x, y);
+}
+
 void getGLInfo()
 {
     auto err = glewInit();

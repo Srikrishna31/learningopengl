@@ -35,3 +35,19 @@ void DefaultRenderer::processSpecialKeys(int key, int x, int y)
 {
 
 }
+
+void DefaultRenderer::processReleaseKey(int key, int x, int y)
+{
+
+}
+
+void DefaultRenderer::processMouseButton(int button, int state, int x, int y)
+{
+
+}
+
+void DefaultRenderer::processMouseMove(int x, int y)
+{
+
+}
+
