@@ -14,4 +14,9 @@ public:
     
     virtual void processMouseButton(int button, int state, int x, int y) = 0;
     virtual void processMouseMove(int x, int y) = 0;
+
+    virtual void processMenuEvents(int option) = 0;
+    // function called by client so that any class wishing to create a menu can do so.
+    virtual bool createMenus() = 0; 
+    virtual void addMenus() = 0;
 };

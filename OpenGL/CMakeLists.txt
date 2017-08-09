@@ -26,3 +26,5 @@ OPTION( glew-cmake_BUILD_SINGLE_CONTEXT "Build the single context glew library" 
 ADD_SUBDIRECTORY(${FREEGLUT_DIR})
 ADD_SUBDIRECTORY(${GLEW_DIR})
 ADD_SUBDIRECTORY(glexperiments)
+
+#ADD_DEPENDENCIES( glexperiments ${FREEGLUT_DIR} ${GLEW_DIR})

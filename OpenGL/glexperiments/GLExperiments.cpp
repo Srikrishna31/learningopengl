@@ -53,6 +53,19 @@ void processMouseMove(int x, int y)
     pRenderer->processMouseMove(x, y);
 }
 
+void processMenuEvents(int option)
+{
+    pRenderer->processMenuEvents(option);
+}
+
+void createGLUTMenus()
+{
+    auto menu = glutCreateMenu(processMenuEvents);
+
+    if (pRenderer->createMenus())
+        glutAttachMenu(GLUT_RIGHT_BUTTON);
+}
+
 void getGLInfo()
 {
     auto err = glewInit();
@@ -95,6 +108,8 @@ int main(int argc, char *argv[])
     glutCreateWindow("Lighthouse3D- GLUT Tutorial");
     
     getGLInfo();
+
+    createGLUTMenus();
 
     glutDisplayFunc(renderScene); //Called when the Paint message is received from the OS
     glutReshapeFunc(windowResized); //Called when the window is resized;

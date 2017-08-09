@@ -51,3 +51,18 @@ void DefaultRenderer::processMouseMove(int x, int y)
 
 }
 
+void DefaultRenderer::processMenuEvents(int option)
+{
+    (void)option;
+    /*do nothing for now.*/
+}
+
+bool DefaultRenderer::createMenus()
+{
+    return false;
+}
+
+void DefaultRenderer::addMenus() 
+{}
+
+

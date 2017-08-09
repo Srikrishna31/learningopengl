@@ -2,6 +2,30 @@
 #include "SnowmanRenderer.h"
 #include "GL/glut.h"
 #include <math.h>
+#include "exception"
+
+enum Colors
+{
+    RED = 1,
+    GREEN,
+    BLUE,
+    ORANGE
+};
+
+enum Shrink
+{
+    SHRINK = 1,
+    NORMAL
+};
+
+enum Fill
+{
+    FILL = 1,
+    LINE
+};
+
+struct InvalidMenuOption : public std::exception
+{};
 
 SnowmanRenderer::SnowmanRenderer()
     : angle(0.0f)
@@ -162,4 +186,128 @@ void SnowmanRenderer::processMouseMove(int x, int y)
         lz = static_cast<float>(-cos(angle + deltaAngle));
     }
 
+}
+
+void SnowmanRenderer::windowResized(int w, int h)
+{
+    if (h == 0)
+        h = 1;
+
+    auto ratio = w * 1.0f / h;
+
+    glMatrixMode(GL_PROJECTION);
+
+    glLoadIdentity();
+
+    glViewport(0, 0, w, h);
+
+    gluPerspective(45.0f, ratio, 0.1f, 100.0f);
+
+    glMatrixMode(GL_MODELVIEW);
+}
+
+void SnowmanRenderer::processMenuEvents(int option)
+{
+
+}
+
+void SnowmanRenderer::processShrinkMenu(int option)
+{
+    switch (static_cast<Shrink>(option))
+    {
+    case SHRINK:
+    case NORMAL:
+        break;
+    default:
+        throw InvalidMenuOption();
+    }
+}
+
+void SnowmanRenderer::processFillMenu(int option)
+{
+    switch (static_cast<Fill>(option))
+    {
+    case FILL:
+    case LINE:
+        break;
+    default:
+        throw InvalidMenuOption();
+    }
+}
+
+void SnowmanRenderer::processColorMenu(int option)
+{
+    switch (static_cast<Colors>(option))
+    {
+    case RED:
+        red = 1.0f;
+        green = 0.0f;
+        blue = 0.0f;
+        break;
+    case GREEN:
+        red = 0.0f;
+        green = 1.0f;
+        blue = 0.0f;
+        break;
+    case BLUE:
+        red = 0.0f;
+        green = 0.0f;
+        blue = 1.0f;
+        break;
+    case ORANGE:
+        red = 1.0f;
+        green = 0.5f;
+        blue = 0.5f;
+        break;
+    default:
+        throw InvalidMenuOption();
+    }
+}
+
+/* Because of the c style nature of  glut library, 
+have to maintain this static pointer and the functions,
+to have the callbacks registered appropriately.*/
+SnowmanRenderer* pRenderer = nullptr;
+
+void processFillMenu(int option)
+{
+    pRenderer->processFillMenu(option);
+}
+
+void processShrinkMenu(int option)
+{
+    pRenderer->processShrinkMenu(option);
+}
+
+void processColorMenu(int option)
+{
+    pRenderer->processColorMenu(option);
+}
+
+void SnowmanRenderer::addMenus()
+{
+
+}
+
+bool SnowmanRenderer::createMenus()
+{
+    pRenderer = this;
+    auto shrinkMenu = glutCreateMenu(::processShrinkMenu);
+    glutAddMenuEntry("Shrink", SHRINK);
+    glutAddMenuEntry("NORMAL", NORMAL);
+
+    auto fillMenu = glutCreateMenu(::processFillMenu);
+    glutAddMenuEntry("Fill", FILL);
+    glutAddMenuEntry("Line", LINE);
+
+    auto colorMenu = glutCreateMenu(::processColorMenu);
+    glutAddMenuEntry("Red", RED);
+    glutAddMenuEntry("Blue", BLUE);
+    glutAddMenuEntry("Green", GREEN);
+    glutAddMenuEntry("Orange", ORANGE);
+
+    glutAddSubMenu("Polygon Mode", fillMenu);
+    glutAddSubMenu("Color", colorMenu);
+
+    return true;
 }
