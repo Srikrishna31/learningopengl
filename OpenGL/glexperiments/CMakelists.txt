@@ -18,12 +18,15 @@ LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/${FREEGLUT_DIR}/bin/${CMAKE_BUILD_TYPE}/
 SET(HEADERS ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/DefaultRenderer.h
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/ISceneRenderer.h
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/SnowmanRenderer.h
-            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/TriangleRenderer.h)
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/stdafx.h
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/TriangleRenderer.h
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/ShaderManager.h)
 
 SET(SOURCES ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/DefaultRenderer.cpp
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/glexperiments.cpp
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/SnowmanRenderer.cpp
-            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/TriangleRenderer.cpp)
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/TriangleRenderer.cpp
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/ShaderManager.cpp)
 
 ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${PROJECT_LINK_LIBS} )

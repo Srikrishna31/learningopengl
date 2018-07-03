@@ -1,12 +1,6 @@
-#include<iostream>
-#include "glew.h"
-#include <GL/glut.h>
-#include <gl/GL.h>
+#include "stdafx.h"
 #include "TriangleRenderer.h"
 #include "SnowmanRenderer.h"
-#include <memory>
-#include <vector>
-#include <string>
 /*
 GLUT tutorial from this site:
 http://www.lighthouse3d.com/tutorials/glut-tutorial/initialization/
@@ -66,7 +60,7 @@ void createGLUTMenus()
         glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
-void getGLInfo()
+bool getGLInfo()
 {
     auto err = glewInit();
     if (GLEW_OK != err)
@@ -78,6 +72,8 @@ void getGLInfo()
 
     auto versionString = "GL_VERSION_"s;
     auto i = 0;
+    auto isOpenGL3orGreater = false;
+    
     for (auto ver : gl_versions)
     {
         if (glewIsSupported((versionString + ver).c_str()))
@@ -88,26 +84,35 @@ void getGLInfo()
                 std::cout << std::endl << "Vendor: " << glGetString(GL_VENDOR);
                 std::cout << std::endl << "Renderer: " << glGetString(GL_RENDERER);
                 std::cout << std::endl << "Shading Language Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION);
+                isOpenGL3orGreater = true;
             }
             break;
         }
         ++i;
     }
+
+    return isOpenGL3orGreater;
 }
 
 int main(int argc, char *argv[])
 {
-    //pRenderer = std::make_unique<TriangleRenderer>();
-    pRenderer = std::make_unique<SnowmanRenderer>();
-
     // init GLUT and create Window
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
     glutInitWindowPosition(100, 100);
     glutInitWindowSize(320, 320);
     glutCreateWindow("Lighthouse3D- GLUT Tutorial");
-    
-    getGLInfo();
+
+    //glew initialization can only happen after GLUT has been initialized and a window created.
+    //So, this function call can only be after the initialization statements above.
+    auto isOpenGL3orGreater = getGLInfo();
+
+    if (!(argc == 2 && (stricmp(argv[1], "-shaders") == 0)  && isOpenGL3orGreater)) {
+        return -1;
+    }
+
+    //pRenderer = std::make_unique<TriangleRenderer>();
+    pRenderer = std::make_unique<SnowmanRenderer>();
 
     createGLUTMenus();
 
