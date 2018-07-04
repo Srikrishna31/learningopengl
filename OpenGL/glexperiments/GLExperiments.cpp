@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "TriangleRenderer.h"
 #include "SnowmanRenderer.h"
+#include "TriangleShaderRenderer.h"
+
 /*
 GLUT tutorial from this site:
 http://www.lighthouse3d.com/tutorials/glut-tutorial/initialization/
@@ -111,8 +113,9 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    pRenderer = std::make_unique<TriangleRenderer>();
+    //pRenderer = std::make_unique<TriangleRenderer>();
     //pRenderer = std::make_unique<SnowmanRenderer>();
+    pRenderer = std::make_unique<TriangleShaderRenderer>();
 
     createGLUTMenus();
 
