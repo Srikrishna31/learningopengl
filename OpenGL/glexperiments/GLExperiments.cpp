@@ -111,8 +111,8 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    //pRenderer = std::make_unique<TriangleRenderer>();
-    pRenderer = std::make_unique<SnowmanRenderer>();
+    pRenderer = std::make_unique<TriangleRenderer>();
+    //pRenderer = std::make_unique<SnowmanRenderer>();
 
     createGLUTMenus();
 

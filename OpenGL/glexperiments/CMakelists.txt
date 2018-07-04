@@ -4,7 +4,8 @@ SET (PROJ_DIR glexperiments)
 PROJECT(${PROJ_DIR})
 
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/${FREEGLUT_DIR}/include/
-                    ${CMAKE_SOURCE_DIR}/${GLEW_DIR}/include/GL/)
+                    ${CMAKE_SOURCE_DIR}/${GLEW_DIR}/include/GL/
+                    ${CMAKE_SOURCE_DIR}/shaders/)
 
 SET(PROJECT_LINK_LIBS freeglut${PROJECT_SUFFIX}${CMAKE_STATIC_LIBRARY_SUFFIX}
                       libglewmx_shared${PROJECT_SUFFIX}${CMAKE_STATIC_LIBRARY_SUFFIX})
@@ -20,19 +21,28 @@ SET(HEADERS ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/DefaultRenderer.h
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/SnowmanRenderer.h
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/stdafx.h
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/TriangleRenderer.h
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/TriangleShaderRenderer.h
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/ShaderManager.h)
 
 SET(SOURCES ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/DefaultRenderer.cpp
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/glexperiments.cpp
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/SnowmanRenderer.cpp
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/TriangleRenderer.cpp
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/TriangleShaderRenderer.cpp
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/ShaderManager.cpp)
+
+SET(SHADER_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}\\${PROJ_DIR}\\shaders\\vertex.vert
+        ${CMAKE_CURRENT_SOURCE_DIR}\\${PROJ_DIR}\\shaders\\framgent.frag
+        ${CMAKE_CURRENT_SOURCE_DIR}\\${PROJ_DIR}\\shaders\\geometry.geom)
+
+SOURCE_GROUP("shaders" FILES ${SHADER_SOURCES})
 
 ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${PROJECT_LINK_LIBS} )
 
 #INSTALL(TARGETS ${PROJECT_NAME} DESTINATION ${PROJECT_BINARY_DIR})
 
+MESSAGE(STATUS "${CMAKE_SOURCE_DIR}")
 
 #Copy the freeglutd.dll/so to the exe path for execution
 ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD 
