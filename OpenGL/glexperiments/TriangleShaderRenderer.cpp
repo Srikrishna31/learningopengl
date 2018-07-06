@@ -1,6 +1,11 @@
 #include "stdafx.h"
 #include "TriangleShaderRenderer.h"
 #include "ShaderManager.h"
+#include "glm/vec3.hpp"
+#include "glm/vec4.hpp"
+#include "glm/mat4x4.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 TriangleShaderRenderer::TriangleShaderRenderer()
 {
@@ -8,17 +13,17 @@ TriangleShaderRenderer::TriangleShaderRenderer()
 
     //Load order of shaders should be maintained: first is vertex and then fragment, since the variables defined in 
     //vertex shader could be used by fragment shader.
-    ShaderManager::loadShader("D:/Personal/Code/Learning_OpenGL_new/OpenGL/glexperiments/shaders/vertex.vert", ShaderManager::ShaderType::VERTEX, program);
-    ShaderManager::loadShader("D:/Personal/Code/Learning_OpenGL_new/OpenGL/glexperiments/shaders/fragment.frag", ShaderManager::ShaderType::FRAGMENT, program);
+    ShaderManager::loadShader("D:/Code/Learning_OpenGL/OpenGL/glexperiments/shaders/vertex.vert", ShaderManager::ShaderType::VERTEX, program);
+    ShaderManager::loadShader("D:/Code/Learning_OpenGL/OpenGL/glexperiments/shaders/fragment.frag", ShaderManager::ShaderType::FRAGMENT, program);
 
     ShaderManager::printShaderInfo(program);
 
     GLint vertexLoc = glGetAttribLocation(program, "position");
 
     //Data set for a set of triangles
-    float pos[] = { -1.0f, 0.0f, -5.0f, 1.0f,
-                   1.0f, 0.0f, -5.0f, 1.0f,
-                   0.0f, 2.0f, -5.0f, 1.0f };
+    float pos[] = { -1.0f, 0.0f, 0.0f, 1.0f,
+                   1.0f, 0.0f, 0.0f, 1.0f,
+                   0.0f, 2.0f, 0.0f, 1.0f };
     
     float textureCoord[] = { 0.0f };
     float normal[] = { 1.0f };
@@ -57,12 +62,6 @@ TriangleShaderRenderer::TriangleShaderRenderer()
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index), index, GL_STATIC_DRAW);
 
 
-    /*
-    Uniform initialization
-    */
-    GLint uniLoc = glGetUniformLocation(program, "color");
-    glProgramUniform4f(program, uniLoc, red, green, blue, 1.0f);
-
     glUseProgram(program);
     glBindVertexArray(vao);
 }
@@ -75,14 +74,18 @@ void TriangleShaderRenderer::renderScene(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glLoadIdentity(); //Clear the transformation matrix.
+    auto view = glm::lookAt(glm::vec3(0.0f, 0.0f, 10.0f), //Eye coordinates
+                            glm::vec3(0.0f, 0.0f, 0.0f), //Point at which Eye is looking.
+                            glm::vec3(0.0f, 1.0f, 0.0f));
 
-    gluLookAt(0.0f, 0.0f, 10.0f, // Eye coordinates
-        0.0f, 0.0f, 0.0f, //Point at which Eye is looking.
-        0.0f, 1.0f, 0.0f); //Up direction for the eye.
+    auto modelview = glm::rotate(view, angle, glm::vec3(0.0f, 0.0f, 1.0f));
 
-    glRotatef(angle, 0.0f, 1.0f, 0.0f);
-    //glColor3f(red, green, blue);
+    GLint uniLoc = glGetUniformLocation(program, "pvm");
+    //Need to transpose the values so that the column major order is restored.
+    glUniformMatrix4fv(uniLoc, 1, GL_TRUE, &modelview[0][0]);
+
+    GLint color = glGetUniformLocation(program, "color");
+    glUniform4fv(color, 1, &(glm::vec4(red, green, 0.0f, 1.0f)[0]));
 
     glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
     glutSwapBuffers();

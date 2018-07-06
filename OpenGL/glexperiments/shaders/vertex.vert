@@ -23,10 +23,9 @@
 
 in vec4 position;
 
-out vec4 color;
+uniform mat4 pvm;
 
 void main() {
     //color = myRedBlueSelection();
-    //gl_Position = pvm * position;
-    gl_Position = position;
+    gl_Position = pvm * position;
 }
