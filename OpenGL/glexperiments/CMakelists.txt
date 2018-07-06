@@ -5,7 +5,7 @@ PROJECT(${PROJ_DIR})
 
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/${FREEGLUT_DIR}/include/
                     ${CMAKE_SOURCE_DIR}/${GLEW_DIR}/include/GL/
-                    ${CMAKE_SOURCE_DIR}/shaders/)
+                    ${CMAKE_SOURCE_DIR}/3rd_party/glm/)
 
 SET(PROJECT_LINK_LIBS freeglut${PROJECT_SUFFIX}${CMAKE_STATIC_LIBRARY_SUFFIX}
                       libglewmx_shared${PROJECT_SUFFIX}${CMAKE_STATIC_LIBRARY_SUFFIX})
