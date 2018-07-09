@@ -49,12 +49,8 @@ TriangleShaderRenderer::TriangleShaderRenderer()
     GLint vertexLoc = glGetAttribLocation(data->program, "position");
 
     //Data set for a set of triangles
-    //float pos[] = { -2.0f, -2.0f, -5.0f,
-    //                2.0f, 0.0f, -5.0f,
-    //                0.0f, 2.0f, -5.0f };
-
-    float pos[] = { -1.0f, 0.0f, 0.0f, 1.0f,
-                   1.0f, 0.0f, 0.0f, 1.0f,
+    float pos[] = { -2.0f, -2.0f, 0.0f, 1.0f,
+                   2.0f, 0.0f, 0.0f, 1.0f,
                    0.0f, 2.0f, 0.0f, 1.0f };
     
     float textureCoord[] = { 0.0f };
@@ -121,8 +117,9 @@ void TriangleShaderRenderer::renderScene(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
  
-    auto modelview = glm::rotate(data->vp, data->angle, glm::vec3(0.0f, 0.0f, 1.0f));
-
+    auto modelview = glm::translate(data->vp, glm::vec3(0.0f, 0.0f, 5.0f));
+    modelview = glm::rotate(modelview, data->angle, glm::vec3(0.0f, 1.0f, 0.0f));
+    //modelview = glm::translate(data->vp, glm::vec3(0.0f, 0.0f, 5.0f));
     //GLuint matricesBlock = glGetUniformBlockIndex(data->program, "Matrices");
     ////the bindingPoint must be smaller than GL_MAX_UNIFORM_BUFFER_BINDING
     //GLuint bindingPoint = 1, buffer;
