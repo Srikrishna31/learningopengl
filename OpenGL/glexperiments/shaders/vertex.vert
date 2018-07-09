@@ -1,7 +1,7 @@
 #version 330 core
 
-//layout(location = 1) uniform Matrices {
-//    mat4 pvm;
+//layout(std140) uniform Matrices {
+    //mat4 pvm;
 //};
 //
 // the signature
