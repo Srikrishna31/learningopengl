@@ -94,19 +94,10 @@ TriangleShaderRenderer::TriangleShaderRenderer()
     glBindVertexArray(vao);
 }
 
-void TriangleShaderRenderer::windowResized(int w, int h)
+void TriangleShaderRenderer::setPerspective(int w, int h, float aspectRatio)
 {
-    //Prevent divide by 0 when window is too short
-    if (h == 0)
-        h = 1;
-
-    auto ratio = 1.0f*w / h;
-
-    glViewport(0, 0, w, h);
-
-    data->perspective = glm::perspective(45.0f, ratio, 1.0f, 1000.0f);
+    data->perspective = glm::perspective(45.0f, aspectRatio, 1.0f, 1000.0f);
     updateModelViewProjectionMatrix();
-
 }
 
 TriangleShaderRenderer::~TriangleShaderRenderer()
@@ -120,6 +111,7 @@ void TriangleShaderRenderer::renderScene(void)
     auto modelview = glm::translate(data->vp, glm::vec3(0.0f, 0.0f, 5.0f));
     modelview = glm::rotate(modelview, data->angle, glm::vec3(0.0f, 1.0f, 0.0f));
     //modelview = glm::translate(data->vp, glm::vec3(0.0f, 0.0f, 5.0f));
+    
     //GLuint matricesBlock = glGetUniformBlockIndex(data->program, "Matrices");
     ////the bindingPoint must be smaller than GL_MAX_UNIFORM_BUFFER_BINDING
     //GLuint bindingPoint = 1, buffer;
@@ -127,9 +119,7 @@ void TriangleShaderRenderer::renderScene(void)
     //glUniformBlockBinding(data->program, matricesBlock, bindingPoint);
     //glBindBuffer(GL_UNIFORM_BUFFER, buffer);
 
-    //glBufferData(GL_UNIFORM_BUFFER, sizeof(modelview), &modelview[0][0], GL_DYNAMIC_DRAW);
-
-
+    //glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(modelview), &modelview[0][0]);
 
     GLint uniLoc = glGetUniformLocation(data->program, "pvm");
     //Need to transpose the values so that the column major order is restored.

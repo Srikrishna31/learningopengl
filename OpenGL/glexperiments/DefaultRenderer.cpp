@@ -15,15 +15,21 @@ void DefaultRenderer::windowResized(int w, int h)
 
     auto ratio = 1.0f*w / h;
 
+    glViewport(0, 0, w, h);
+
+    setPerspective(w, h, ratio);
+}
+
+void DefaultRenderer::setPerspective(int w, int h, float aspectRatio)
+{
     glMatrixMode(GL_PROJECTION);
 
     glLoadIdentity();
 
-    glViewport(0, 0, w, h);
-
-    gluPerspective(45, ratio, 1, 1000);
+    gluPerspective(45, aspectRatio, 1, 1000);
 
     glMatrixMode(GL_MODELVIEW);
+
 }
 
 void DefaultRenderer::processNormalKeys(uint8_t key, int x, int y)

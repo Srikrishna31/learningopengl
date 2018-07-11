@@ -8,7 +8,7 @@ private:
     
     void updateModelViewProjectionMatrix();
 public:
-    virtual void windowResized(int w, int h) override;
+    void setPerspective(int w, int h, float aspectRatio) override;
 
     TriangleShaderRenderer();
     ~TriangleShaderRenderer();
