@@ -89,7 +89,6 @@ TriangleShaderRenderer::TriangleShaderRenderer()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index), index, GL_STATIC_DRAW);
 
-
     glUseProgram(data->program);
     glBindVertexArray(vao);
 }
@@ -111,20 +110,19 @@ void TriangleShaderRenderer::renderScene(void)
     auto modelview = glm::translate(data->vp, glm::vec3(0.0f, 0.0f, 5.0f));
     modelview = glm::rotate(modelview, data->angle, glm::vec3(0.0f, 1.0f, 0.0f));
     //modelview = glm::translate(data->vp, glm::vec3(0.0f, 0.0f, 5.0f));
+    auto modelViewT = glm::transpose(modelview);
     
-    //GLuint matricesBlock = glGetUniformBlockIndex(data->program, "Matrices");
-    ////the bindingPoint must be smaller than GL_MAX_UNIFORM_BUFFER_BINDING
-    //GLuint bindingPoint = 1, buffer;
-    //glGenBuffers(1, &buffer);
-    //glUniformBlockBinding(data->program, matricesBlock, bindingPoint);
-    //glBindBuffer(GL_UNIFORM_BUFFER, buffer);
+    GLuint matricesBlock = glGetUniformBlockIndex(data->program, "Matrices");
+    //the bindingPoint must be smaller than GL_MAX_UNIFORM_BUFFER_BINDING
+    GLuint bindingPoint = 1, buffer;
+    glGenBuffers(1, &buffer);
+    glUniformBlockBinding(data->program, matricesBlock, bindingPoint);
+    glBindBuffer(GL_UNIFORM_BUFFER, buffer);
+
+    glBufferData(GL_UNIFORM_BUFFER, sizeof(modelViewT), &modelViewT, GL_DYNAMIC_DRAW);
+    glBindBufferBase(GL_UNIFORM_BUFFER, bindingPoint, buffer);
 
     //glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(modelview), &modelview[0][0]);
-
-    GLint uniLoc = glGetUniformLocation(data->program, "pvm");
-    //Need to transpose the values so that the column major order is restored.
-    glUniformMatrix4fv(uniLoc, 1, GL_TRUE, &modelview[0][0]);
-
 
     GLint color = glGetUniformLocation(data->program, "color");
     glUniform4fv(color, 1, &(glm::vec4(data->red, data->green, data->blue, 1.0f)[0]));
