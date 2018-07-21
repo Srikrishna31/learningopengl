@@ -1,11 +1,5 @@
 #include "stdafx.h"
 #include "TriangleShaderRenderer.h"
-#include "ShaderManager.h"
-#include "glm/vec3.hpp"
-#include "glm/vec4.hpp"
-#include "glm/mat4x4.hpp"
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtc/type_ptr.hpp"
 
 //Internal structure holding data for the class.
 struct Impl {
@@ -17,6 +11,7 @@ struct Impl {
     GLuint program = 0;
     GLuint vertShader = 0;
     GLuint fragShader = 0;
+    GLuint vertexAttribArray = 0;
 
     glm::mat4 perspective = glm::mat4(1.0f);
     glm::mat4 view = glm::mat4(1.0f);
@@ -58,39 +53,8 @@ TriangleShaderRenderer::TriangleShaderRenderer()
 
     uint32_t index[] = { 0, 1, 2 };
 
-    /*
-    Attribute initialization
-    */
-    GLuint vao;
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
-
-    GLuint buffer;
-    glGenBuffers(1, &buffer);
-    
-    //bind buffer for positions and copy data into buffer
-    //GL_ARRAY_BUFFER is the buffer we use to feed attributes.
-    glBindBuffer(GL_ARRAY_BUFFER, buffer);
-
-    //feed the buffer, and let OpenGL know that we don't plan to 
-    //change it (STATIC) and that it will be used for drawing (DRAW)
-    glBufferData(GL_ARRAY_BUFFER, sizeof(pos), pos, GL_STATIC_DRAW);
- 
-    //Enable the attribute at that location 
-    glEnableVertexAttribArray(vertexLoc);
-
-    //Tell OpenGL what the array contains:
-    //It is a set of 4 floats for each vertex.
-    glVertexAttribPointer(vertexLoc, 4, GL_FLOAT, 0, 0, 0);
-
-    GLuint indBuffer;
-    glGenBuffers(1, &indBuffer);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indBuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index), index, GL_STATIC_DRAW);
-
-    glUseProgram(data->program);
-    glBindVertexArray(vao);
+    data->vertexAttribArray = ShaderManager::loadVertexArray(data->program, vertexLoc, pos, sizeof(pos), 4,
+                                                             index, sizeof(index), GL_STATIC_DRAW);
 }
 
 void TriangleShaderRenderer::setPerspective(int w, int h, float aspectRatio)
