@@ -10,8 +10,8 @@ INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/${FREEGLUT_DIR}/include/
 SET(PROJECT_LINK_LIBS freeglut${PROJECT_SUFFIX}${CMAKE_STATIC_LIBRARY_SUFFIX}
                       libglewmx_shared${PROJECT_SUFFIX}${CMAKE_STATIC_LIBRARY_SUFFIX})
 
-LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/${FREEGLUT_DIR}/lib/${CMAKE_BUILD_TYPE}/
-                 ${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}/)
+LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/${FREEGLUT_DIR}/lib/
+                 ${CMAKE_BINARY_DIR}/lib/)
 
 LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/${FREEGLUT_DIR}/bin/${CMAKE_BUILD_TYPE}/
                  ${CMAKE_BINARY_DIR}/bin/${CMAKE_BUILD_TYPE})
@@ -47,11 +47,11 @@ MESSAGE(STATUS "${CMAKE_SOURCE_DIR}")
 #Copy the freeglutd.dll/so to the exe path for execution
 ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD 
                     COMMAND ${CMAKE_COMMAND} -E copy_if_different
-                    "${CMAKE_BINARY_DIR}/${FREEGLUT_DIR}/bin/${CMAKE_BUILD_TYPE}/freeglut${PROJECT_SUFFIX}${CMAKE_SHARED_LIBRARY_SUFFIX}"
+                    "${CMAKE_BINARY_DIR}/${FREEGLUT_DIR}/bin/freeglut${PROJECT_SUFFIX}${CMAKE_SHARED_LIBRARY_SUFFIX}"
                     $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 
 #Copy the glewd.dll/so to the exe path for execution
 ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD
                     COMMAND ${CMAKE_COMMAND} -E copy_if_different
-                    "${CMAKE_BINARY_DIR}/bin/${CMAKE_BUILD_TYPE}/glewmx${PROJECT_SUFFIX}${CMAKE_SHARED_LIBRARY_SUFFIX}"
+                    "${CMAKE_BINARY_DIR}/bin/glewmx${PROJECT_SUFFIX}${CMAKE_SHARED_LIBRARY_SUFFIX}"
                     $<TARGET_FILE_DIR:${PROJECT_NAME}>)
