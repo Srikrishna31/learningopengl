@@ -37,8 +37,10 @@ LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/${FREEGLUT_DIR}/bin/${CMAKE_BUILD_TYPE}/
                  ${ASSIMP_PATH}/bin/)
 
 SET(HEADERS ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/DefaultRenderer.h
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/DefaultShaderRenderer.h
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/ISceneRenderer.h
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/ModelRenderer.h
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/RectangularMeshRenderer.h
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/SnowmanRenderer.h
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/stdafx.h
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/TriangleRenderer.h
@@ -46,8 +48,10 @@ SET(HEADERS ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/DefaultRenderer.h
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/ShaderManager.h)
 
 SET(SOURCES ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/DefaultRenderer.cpp
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/DefaultShaderRenderer.cpp
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/glexperiments.cpp
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/ModelRenderer.cpp
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/RectangularMeshRenderer.cpp
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/SnowmanRenderer.cpp
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/TriangleRenderer.cpp
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/TriangleShaderRenderer.cpp

@@ -13,6 +13,14 @@ class ModelRenderer : public DefaultRenderer
 private:
     std::unique_ptr<struct Internal> m_data;
 
+private:
+    void updateModelViewProjectionMatrix();
+
 public:
     ModelRenderer(const std::string& modelFilePath);
+
+    void setPerspective(int w, int h, float aspectRatio) override;
+
+    void renderScene(void) override;
+
 };
