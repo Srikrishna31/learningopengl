@@ -5,6 +5,7 @@ cc_binary(
     srcs = [
             "include/DefaultRenderer.h",
             "include/ISceneRenderer.h",
+            "include/ModelRenderer.h",
             "include/RectangularMeshRenderer.h",
             "include/ShaderManager.h",
             "include/SnowmanRenderer.h",
@@ -14,6 +15,7 @@ cc_binary(
 
             "src/DefaultRenderer.cpp",
             "src/GLExperiments.cpp",
+            "src/ModelRenderer.cpp",
             "src/RectangularMeshRenderer.cpp",
             "src/ShaderManager.cpp",
             "src/SnowmanRenderer.cpp",
