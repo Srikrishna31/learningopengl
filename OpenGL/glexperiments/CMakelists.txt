@@ -87,3 +87,9 @@ ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD
                     COMMAND ${CMAKE_COMMAND} -E copy_if_different
                     "${ASSIMP_PATH}/bin/assimp-vc140-mt${PROJECT_SUFFIX}${CMAKE_SHARED_LIBRARY_SUFFIX}"
                     $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+
+#Copy the assimp-vc140-mtd.dll/so to the exe path for execution
+ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD
+                    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                    "${ASSIMP_PATH}/bin/assimp-vc140-mt${PROJECT_SUFFIX}${CMAKE_SHARED_LIBRARY_SUFFIX}"
+                    $<TARGET_FILE_DIR:${PROJECT_NAME}>)
