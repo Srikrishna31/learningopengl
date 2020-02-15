@@ -7,6 +7,7 @@ public:
     
     virtual void renderScene(void) = 0;
     virtual void windowResized(int w, int h) = 0;
+    virtual void setPerspective(int w, int h, float aspectRatio) = 0;
     
     virtual void processNormalKeys(uint8_t key, int x, int y) = 0;
     virtual void processSpecialKeys(int key, int x, int y) = 0;

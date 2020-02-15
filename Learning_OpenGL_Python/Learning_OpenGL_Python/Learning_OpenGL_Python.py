@@ -12,7 +12,7 @@ from PyQt5.QtOpenGL import QGLWidget
 
 
 class SpiralWidget(QGLWidget):
-    def __init__(self, parent):  
+    def __init__(self, parent):
         super().__init__(parent)
         self.setMinimumSize(500, 500)
 
@@ -31,7 +31,7 @@ class SpiralWidget(QGLWidget):
         x = radius * math.sin(0)
         y = radius * math.cos(0)
         glColor(0.0, 1.0, 0.0)
-        
+
         glBegin (GL_LINE_STRIP)
         for deg in range(1000):
             glVertex(x,y,0.0)
@@ -43,7 +43,7 @@ class SpiralWidget(QGLWidget):
 
 
         glEnableClientState(GL_VERTEX_ARRAY)
-        
+
         #TODO: Use list comprehension
         spiral_array = []
 

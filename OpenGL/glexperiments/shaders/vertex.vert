@@ -1,8 +1,8 @@
 #version 330 core
 
-//layout(location = 1) uniform Matrices {
-//    mat4 pvm;
-//};
+layout(std140) uniform Matrices {
+    mat4 pvm;
+};
 //
 // the signature
 //subroutine vec4 colorRedBlue();
@@ -23,7 +23,6 @@
 
 in vec4 position;
 
-uniform mat4 pvm;
 
 void main() {
     //color = myRedBlueSelection();

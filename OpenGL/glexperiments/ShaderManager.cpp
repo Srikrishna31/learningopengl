@@ -127,4 +127,45 @@ namespace ShaderManager {
 
         return true;
     }
+
+    auto loadVertexArray(const GLuint program, const GLint vertexLoc, const float* vertices, const uint32_t numVertices,
+        const uint8_t vertexComponents, const uint32_t* indices, const uint32_t numIndices, const uint32_t DRAW_TYPE) -> GLuint
+    {
+        /*
+        Attribute initialization
+        */
+        GLuint vao;
+        glGenVertexArrays(1, &vao);
+        glBindVertexArray(vao);
+
+        GLuint buffer;
+        glGenBuffers(1, &buffer);
+
+        //bind buffer for positions and copy data into buffer
+        //GL_ARRAY_BUFFER is the buffer we use to feed attributes.
+        glBindBuffer(GL_ARRAY_BUFFER, buffer);
+
+        //feed the buffer, and let OpenGL know that we don't plan to 
+        //change it (STATIC) and that it will be used for drawing (DRAW)
+        glBufferData(GL_ARRAY_BUFFER, numVertices, vertices, GL_STATIC_DRAW);
+
+        //Enable the attribute at that location 
+        glEnableVertexAttribArray(vertexLoc);
+
+        //Tell OpenGL what the array contains:
+        //It is a set of vertexComponents (2,3,4) floats for each vertex.
+        glVertexAttribPointer(vertexLoc, vertexComponents, GL_FLOAT, 0, 0, 0);
+
+        GLuint indBuffer;
+        glGenBuffers(1, &indBuffer);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indBuffer);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, numIndices, indices, GL_STATIC_DRAW);
+
+        glUseProgram(program);
+        glBindVertexArray(vao);
+
+        return vao;
+    }
+
 };

@@ -8,6 +8,7 @@ public:
 
     virtual void renderScene(void) override;
     virtual void windowResized(int w, int h) override;
+    virtual void setPerspective(int w, int h, float aspectRatio) override;
 
     virtual void processNormalKeys(uint8_t key, int x, int y) override;
     virtual void processSpecialKeys(int key, int x, int y) override;

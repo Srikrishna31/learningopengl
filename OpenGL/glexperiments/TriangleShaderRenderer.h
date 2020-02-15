@@ -4,16 +4,12 @@
 class TriangleShaderRenderer final : public DefaultRenderer
 {
 private:
-    float angle = 0.0f;
-    float red = 1.0f;
-    float green = 1.0f;
-    float blue = 1.0f;
-
-    GLuint program = 0;
-    GLuint vertShader = 0;
-    GLuint fragShader = 0;
-
+    std::unique_ptr<struct Impl> data;
+    
+    void updateModelViewProjectionMatrix();
 public:
+    void setPerspective(int w, int h, float aspectRatio) override;
+
     TriangleShaderRenderer();
     ~TriangleShaderRenderer();
 
