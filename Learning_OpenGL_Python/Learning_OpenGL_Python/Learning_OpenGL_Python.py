@@ -3,10 +3,12 @@ This project contains code to explore and learn about OpenGL technologies.
 """
 import sys
 import math
-from OpenGL.GL import *
-from OpenGL.GLU import *
+from OpenGL.GL import glBegin, glEnd, glColor, glVertexPointerf, glDrawArrays, glFlush, glClearColor, glViewport, glMatrixMode, \
+                      glLoadIdentity, glClearDepth, glClear, glVertex, glEnableClientState, GL_PROJECTION, GL_VERTEX_ARRAY, \
+                      GL_LINE_STRIP, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT
+from OpenGL.GLU import gluPerspective
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5.QtOpenGL import *
+from PyQt5.QtOpenGL import QGLWidget
 
 
 class SpiralWidget(QGLWidget):
@@ -96,8 +98,11 @@ class SpiralWidgetDemo(QMainWindow):
         self.setCentralWidget(widget)
 
 
-if __name__=='__main__':
+def main():
     app = QApplication(['Spiral Widget Demo'])
     window = SpiralWidgetDemo()
     window.show()
     sys.exit(app.exec_())
+
+if __name__=='__main__':
+    main()

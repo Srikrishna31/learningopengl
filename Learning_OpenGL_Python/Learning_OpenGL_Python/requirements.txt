@@ -1,0 +1,6 @@
+pip>=10.0.1
+PyOpenGL>=3.1.0
+PyOpenGL-accelerate>=3.1.0
+PyQt5>=5.11.2
+PyQt5-sip>=4.19.12
+setuptools>=39.0.1
