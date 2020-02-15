@@ -2,7 +2,7 @@
 #include "TriangleRenderer.h"
 #include "SnowmanRenderer.h"
 #include "TriangleShaderRenderer.h"
-#include "ModelRenderer.h"
+//#include "ModelRenderer.h"
 
 /*
 GLUT tutorial from this site:
@@ -115,19 +115,19 @@ int main(int argc, char *argv[])
     }
 
     //pRenderer = std::make_unique<TriangleRenderer>();
-    //pRenderer = std::make_unique<SnowmanRenderer>();
-    if (stricmp(argv[2], "-model") == 0) {
-        try {
-            pRenderer = std::make_unique<ModelRenderer>(argv[3]);
-        }
-        catch (InvalidModelFileException& e) {
-            std::cout << "Model file does not exist or is not in valid format: " << argv[3] << std::endl;
-            pRenderer = std::make_unique<TriangleShaderRenderer>();
-        }
-    }
-    else {
-        pRenderer = std::make_unique<TriangleShaderRenderer>();
-    }
+    pRenderer = std::make_unique<SnowmanRenderer>();
+    //if (stricmp(argv[2], "-model") == 0) {
+    //    try {
+    //        pRenderer = std::make_unique<ModelRenderer>(argv[3]);
+    //    }
+    //    catch (InvalidModelFileException& e) {
+    //        std::cout << "Model file does not exist or is not in valid format: " << argv[3] << std::endl;
+    //        pRenderer = std::make_unique<TriangleShaderRenderer>();
+    //    }
+    //}
+    //else {
+    //    pRenderer = std::make_unique<TriangleShaderRenderer>();
+    //}
 
     createGLUTMenus();
 
