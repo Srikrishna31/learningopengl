@@ -1,7 +1,8 @@
-# https://docs.bazel.build/versions/master/be/c-cpp.html#cc_library
 cc_library(
     name = "glew",
-    srcs = glob(["glew-2.1.0/src/*.c"]),
+    defines=["_GUICTRLS"],
+    srcs = ["glew-2.1.0/src/glew.c",
+            "glew-2.1.0/src/glewinfo.c"],
     hdrs = glob(["glew-2.1.0/include/GL/*.h"]),
     includes = ["glew-2.1.0/include/"],
     visibility = ["//visibility:public"]
