@@ -21,5 +21,8 @@ cc_binary(
             "src/TriangleShaderRenderer.cpp"
     ],
     includes = ["include"],
-    deps = ["@glew"],
+    deps = [
+        "@glew",
+        "@glut"
+        ],
 )
