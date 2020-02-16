@@ -20,6 +20,6 @@ cc_binary(
             "src/TriangleRenderer.cpp",
             "src/TriangleShaderRenderer.cpp"
     ],
-    includes = ["include"]
-    # deps = ["libraries to be linked"],
+    includes = ["include"],
+    deps = ["@glew"],
 )

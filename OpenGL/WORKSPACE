@@ -1,0 +1,5 @@
+workspace(name = "glexperiments")
+
+load("@//third_party:dependencies.bzl", "import_dependencies")
+
+import_dependencies()
