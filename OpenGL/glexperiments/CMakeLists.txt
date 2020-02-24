@@ -49,7 +49,7 @@ SET(HEADERS ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/DefaultRenderer.h
 
 SET(SOURCES ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/DefaultRenderer.cpp
             #${CMAKE_SOURCE_DIR}/${PROJ_DIR}/DefaultShaderRenderer.cpp
-            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/glexperiments.cpp
+            ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/GLExperiments.cpp
             #${CMAKE_SOURCE_DIR}/${PROJ_DIR}/ModelRenderer.cpp
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/RectangularMeshRenderer.cpp
             ${CMAKE_SOURCE_DIR}/${PROJ_DIR}/SnowmanRenderer.cpp
