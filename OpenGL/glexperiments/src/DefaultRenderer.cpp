@@ -1,6 +1,6 @@
+#include <stdafx.h>
 #include <cstdint>
 #include "DefaultRenderer.h"
-#include "GL/glut.h"
 
 void DefaultRenderer::renderScene(void)
 {
@@ -68,7 +68,7 @@ bool DefaultRenderer::createMenus()
     return false;
 }
 
-void DefaultRenderer::addMenus() 
+void DefaultRenderer::addMenus()
 {}
 
 

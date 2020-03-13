@@ -1,6 +1,6 @@
+#include "stdafx.h"
 #include <cstdint>
 #include "TriangleRenderer.h"
-#include "GL/glut.h"
 
 void TriangleRenderer::renderScene(void)
 {

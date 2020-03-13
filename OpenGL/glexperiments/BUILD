@@ -23,7 +23,7 @@ cc_binary(
     includes = ["include"],
     deps = [
         "@glew",
-        "@glut",
+        "@freeglutd",
         "@glm"
         ],
 )
