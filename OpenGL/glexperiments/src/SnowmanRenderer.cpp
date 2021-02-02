@@ -1,6 +1,6 @@
+#include "stdafx.h"
 #include <cstdint>
 #include "SnowmanRenderer.h"
-#include "GL/glut.h"
 #include <math.h>
 #include "exception"
 
@@ -45,7 +45,7 @@ void SnowmanRenderer::drawSnowman()
     //Draw Body
     glTranslatef(0.0f, 0.75f, 0.0f);
     glutSolidSphere(0.75f, 20, 20);
-    
+
     //Draw head
     glTranslatef(0.0f, 1.0f, 0.0f);
     glutSolidSphere(0.25f, 20, 20);
@@ -181,7 +181,7 @@ void SnowmanRenderer::processMouseMove(int x, int y)
     if (xOrigin >= 0) //will be true only when the mouse button is down
     {
         deltaAngle = (x - xOrigin) * 0.001f;
-        
+
         lx = static_cast<float>(sin(angle + deltaAngle));
         lz = static_cast<float>(-cos(angle + deltaAngle));
     }
@@ -264,7 +264,7 @@ void SnowmanRenderer::processColorMenu(int option)
     }
 }
 
-/* Because of the c style nature of  glut library, 
+/* Because of the c style nature of  glut library,
 have to maintain this static pointer and the functions,
 to have the callbacks registered appropriately.*/
 SnowmanRenderer* pRenderer = nullptr;
