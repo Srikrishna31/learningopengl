@@ -26,7 +26,7 @@ cc_binary(
     deps = [
         "@assimp//:libassimp",
         "@glew",
-        "@freeglutd//:libglut",
+        "@freeglut//:libglut",
         "@glm"
         ],
     linkopts = select ({
