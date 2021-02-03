@@ -116,9 +116,10 @@ int main(int argc, char *argv[])
 
     //pRenderer = std::make_unique<TriangleRenderer>();
     //pRenderer = std::make_unique<SnowmanRenderer>();
-    if (stricmp(argv[2], "-model") == 0) {
+    if (strcasecmp(argv[2], "-model") == 0) {
         try {
-            pRenderer = std::make_unique<ModelRenderer>(argv[3]);
+            auto modelPath  = std::string{argv[3]};
+            pRenderer = std::make_unique<ModelRenderer>(modelPath);
         }
         catch (InvalidModelFileException& e) {
             std::cout << "Model file does not exist or is not in valid format: " << argv[3] << std::endl;

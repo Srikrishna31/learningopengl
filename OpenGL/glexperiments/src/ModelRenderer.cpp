@@ -41,7 +41,7 @@ ModelRenderer::ModelRenderer(const string& modelFilePath)
         m_data->pScene = std::unique_ptr<const aiScene>(pScene);
         m_data->modelFilePath = modelFilePath;
 
-        if (m_data->pScene->HasCameras) {
+        if (m_data->pScene->HasCameras()) {
             //Load the default camera for viewing the model.
             auto cameraMatrix = aiMatrix4x4();
             m_data->pScene->mCameras[0]->GetCameraMatrix(cameraMatrix);
@@ -57,11 +57,11 @@ ModelRenderer::ModelRenderer(const string& modelFilePath)
         }
         updateModelViewProjectionMatrix();
 
-        if (pScene->HasMeshes) {
+        if (pScene->HasMeshes()) {
             for (int i = 0; i < pScene->mNumMeshes; i++) {
-                ShaderManager::loadVertexArray(m_data->program, m_data->)
+//                ShaderManager::loadVertexArray(m_data->program, m_data->)
                 for (int j = 0; j < pScene->mMeshes[i]->mNumVertices; j++) {
-                    pScene->mMeshes[i]->mVertices[0].
+//                    pScene->mMeshes[i]->mVertices[0].
                 }
             }
         }
@@ -71,6 +71,11 @@ ModelRenderer::ModelRenderer(const string& modelFilePath)
     }
 
     glEnable(GL_DEPTH_TEST);
+}
+
+ModelRenderer::~ModelRenderer()
+{
+
 }
 
 void ModelRenderer::updateModelViewProjectionMatrix()

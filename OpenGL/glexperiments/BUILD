@@ -24,6 +24,7 @@ cc_binary(
     ],
     includes = ["include"],
     deps = [
+        "@assimp//:libassimp",
         "@glew",
         "@freeglutd//:libglut",
         "@glm"

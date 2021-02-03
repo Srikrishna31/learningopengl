@@ -1,10 +1,10 @@
 #pragma once
 #include "DefaultRenderer.h"
 
-class InvalidModelFileException : public std::exception {
+class InvalidModelFileException : public std::invalid_argument {
 public:
     InvalidModelFileException(const std::string& message)
-        :std::exception(message.c_str())
+        :std::invalid_argument(message.c_str())
     {}
 };
 
@@ -18,6 +18,7 @@ private:
 
 public:
     ModelRenderer(const std::string& modelFilePath);
+    ~ModelRenderer() override;
 
     void setPerspective(int w, int h, float aspectRatio) override;
 
