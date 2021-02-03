@@ -267,7 +267,7 @@ void SnowmanRenderer::processColorMenu(int option)
 /* Because of the c style nature of  glut library,
 have to maintain this static pointer and the functions,
 to have the callbacks registered appropriately.*/
-SnowmanRenderer* pRenderer = nullptr;
+static SnowmanRenderer* pRenderer = nullptr;
 
 void processFillMenu(int option)
 {
