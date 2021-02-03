@@ -26,6 +26,9 @@ cc_binary(
         "@freeglutd//:libglut",
         "@glm"
         ],
-    linkopts = ["-lGL", "-lGLU", "-lX11", "-lXrandr", "-lXi"],
+    linkopts = select ({
+        "@bazel_tools//src/conditions:linux_x86_64" : ["-lGL", "-lGLU", "-lX11", "-lXrandr", "-lXi"],
+        "@bazel_tools//src/conditions:windows" : []
+    }),
     visibility = ["//visibility:public"]
 )

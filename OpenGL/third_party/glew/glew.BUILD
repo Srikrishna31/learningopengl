@@ -6,5 +6,4 @@ cc_library(
     hdrs = glob(["glew-2.1.0/include/GL/*.h"]),
     includes = ["glew-2.1.0/include/"],
     visibility = ["//visibility:public"]
-    # deps = ["header files"],
 )
