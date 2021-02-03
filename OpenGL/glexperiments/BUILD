@@ -28,7 +28,8 @@ cc_binary(
         ],
     linkopts = select ({
         "@bazel_tools//src/conditions:linux_x86_64" : ["-lGL", "-lGLU", "-lX11", "-lXrandr", "-lXi"],
-        "@bazel_tools//src/conditions:windows" : []
+        "@bazel_tools//src/conditions:windows" : [],
+        "@bazel_tools//src/conditions:darwin" : ["-framework OpenGL"],
     }),
     visibility = ["//visibility:public"]
 )
