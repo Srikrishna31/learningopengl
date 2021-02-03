@@ -26,7 +26,8 @@ For Windows, the prerequisites are:
 	2. Note that the commandline arguments can be passed to the executable based on the explanation given here: https://docs.microsoft.com/en-us/cpp/ide/cmake-tools-for-visual-cpp?view=vs-2017
 
 For Linux(Ubuntu), the prerequisites are:
-	1. OpenGL headers and libraries, which can be installed with: "sudo apt install libgl1-mesa-dev" and "sudo apt install mesa-utils" to check the OpenGL version, which can be done with this command: glxinfo | grep "OpenGL version".
+	1. OpenGL headers and libraries, which can be installed with: "sudo apt install libgl1-mesa-dev mesa-common-dev libglu1-mesa-dev" and "sudo apt install mesa-utils" to check the OpenGL version, which can be done with this command: glxinfo | grep "OpenGL version".
+	2. Install additional supporting libraries: "sudo apt install libx11-dev libxrandr-dev libxi-dev"
 
 To build the OpenGL project, invoke cmake as below:
 cmake -G "Visual Studio 15 Win64" -DCMAKE_BUILD_TYPE="Debug" -DASSIMP_PATH=<path-to-copy-binaries-to> ../

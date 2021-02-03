@@ -23,7 +23,9 @@ cc_binary(
     includes = ["include"],
     deps = [
         "@glew",
-        "@freeglutd",
+        "@freeglutd//:libglut",
         "@glm"
         ],
+    linkopts = ["-lGL", "-lGLU", "-lX11", "-lXrandr", "-lXi"],
+    visibility = ["//visibility:public"]
 )

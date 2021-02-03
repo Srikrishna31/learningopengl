@@ -110,7 +110,7 @@ int main(int argc, char *argv[])
     //So, this function call can only be after the initialization statements above.
     auto isOpenGL3orGreater = getGLInfo();
 
-    if (!(argc == 4 && (stricmp(argv[1], "-shaders") == 0)  && isOpenGL3orGreater)) {
+    if (!(argc == 4 && (strcasecmp(argv[1], "-shaders") == 0)  && isOpenGL3orGreater)) {
         return -1;
     }
 

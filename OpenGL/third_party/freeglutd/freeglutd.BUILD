@@ -64,20 +64,25 @@ filegroup(
 # )
 
 cmake_external(
-    name = "freeglutd",
+    name = "libglut",
     generate_crosstool_file = True,
     cache_entries = {
-        "FREEGLUT_BUILD_STATIC_LIBS" : "OFF",
+        "FREEGLUT_BUILD_STATIC_LIBS" : "ON",
         "FREEGLUT_BUILD_DEMOS" : "OFF",
     },
-    cmake_options = ["-G \"NMake Makefiles\""],
+    #cmake_options = ["-G \"NMake Makefiles\""],
+    # cmake_options = ["-G \"Unix Makefiles\""],
     # lib_name = "freeglutd",
     lib_source = ":all",
+    # make_commands = [
+    #     "nmake ",
+    #     "nmake install"
+    # ],
     make_commands = [
-        "nmake ",
-        "nmake install"
+        "make",
+        "make install"
     ],
-    static_libraries = ["freeglutd.lib"],
+    # static_libraries = ["freeglutd.lib"],
     # out_include_dir = "include/freeglut",
     visibility = ["//visibility:public"],
 )
