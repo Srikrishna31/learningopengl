@@ -1,33 +1,33 @@
 load("@rules_foreign_cc//tools/build_defs:cmake.bzl", "cmake_external")
 
-# suffix = "d" if compilation_mode == "dbg" else ""
-
 config_setting (
     name = "linux_debug",
     values = {
-        "@bazel_tools//src/conditions:linux_x86_64" : "",
         "compilation_mode" : "dbg"
     },
+    constraint_values = [
+        "@platforms//os:linux",
+    ]
 )
-
-config_setting(
-    name = "debug",
-    values = {
-        "compilation_mode" : "dbg"
-    }
-)
-
-suffix = select({
-        ":debug" : "d",
-        "//conditions:default" : ""
-        })
 
 config_setting (
     name = "windows_debug",
     values = {
-        "@bazel_tools//src/conditions" : "windows",
         "compilation_mode" : "dbg"
-    }
+    },
+    constraint_values = [
+        "@platforms//os:windows"
+    ]
+)
+
+config_setting (
+    name = "mac_debug",
+    values = {
+        "compilation_mode" : "dbg"
+    },
+    constraint_values = [
+        "@platforms//os:mac"
+    ]
 )
 
 filegroup(
@@ -51,8 +51,9 @@ cmake_external(
     }),
     lib_source = ":all",
     static_libraries = select({
-        "@bazel_tools//src/conditions:linux_x86_64" : ["libassimp" + suffix + ".a", "libIrrXML.a", "libzlibstatic.a"],
-        #":linux_debug" : ["libassimpd.a", "libIrrXMLd.a", "libzlibstaticd.a"],
+        "@bazel_tools//src/conditions:linux_x86_64" : ["libassimp.a", "libIrrXML.a", "libzlibstatic.a"],
+        ":linux_debug" : ["libassimpd.a", "libIrrXMLd.a", "libzlibstaticd.a"],
+        ":windows_debug" : ["libassimpd.lib", "libIrrXMLd.lib", "libzlibstaticd.lib"],
         "@bazel_tools//src/conditions:windows" : ["libassimp.lib", "libIrrXML.lib", "libzlibstatic.lib"],
     }),
     make_commands = select({
