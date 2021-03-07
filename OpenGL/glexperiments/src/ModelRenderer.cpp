@@ -12,6 +12,15 @@ http://ogldev.atspace.co.uk/www/tutorial22/tutorial22.html
 */
 using namespace std;
 
+struct Vertex {
+    glm::vec3 pos_;
+    glm::vec2 tex_;
+    glm::vec3 normal_;
+};
+
+struct Mesh {
+    std::vector<Vertex> Vertices_;
+};
 struct Internal {
     std::string modelFilePath;
     std::unique_ptr<const aiScene> pScene;
@@ -59,11 +68,27 @@ ModelRenderer::ModelRenderer(const string& modelFilePath)
 
         if (pScene->HasMeshes()) {
             for (int i = 0; i < pScene->mNumMeshes; i++) {
-//                ShaderManager::loadVertexArray(m_data->program, m_data->)
+//                ShaderManager::loadVertexArray(m_data->program, m_data->
                 for (int j = 0; j < pScene->mMeshes[i]->mNumVertices; j++) {
 //                    pScene->mMeshes[i]->mVertices[0].
                 }
             }
+        }
+
+        if (pScene->HasLights()) {
+
+        }
+
+        if (pScene->HasTextures()) {
+
+        }
+
+        if (pScene->HasAnimations()) {
+
+        }
+
+        if (pScene->HasMaterials()) {
+
         }
     }
     else {
